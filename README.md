@@ -450,6 +450,73 @@ Note that it is possible the API of the messages is still unstable and will like
 
 The following features are experimental. This means its working or API will likely change somewhat in the near future, but they can already be used.
 
+## ADL Branch Comparison
+
+This repository has several branches containing ADL-related enhancements that are not yet merged into the main branch. Below are the key differences:
+
+### Current Main Branch ADL Support
+
+The main branch currently supports:
+- **ADL 1.4 to ADL 2.0 conversion** - Basic conversion functionality from ADL 1.4 format to ADL 2.0
+- **ADL 2.0 grammar support** - Parser can handle ADL 2.0 syntax with `id` codes
+- **Node ID conversion** - Converts ADL 1.4 `at` codes to ADL 2.0 `id` codes during conversion
+- **Basic terminology conversion** - Handles term definitions and bindings during conversion
+
+### ADL-Related Branches with Missing Features
+
+#### `adl_2.4_support` Branch
+**What it adds that's not in main:**
+- **ADL 2.4 grammar support** - Enhanced grammar that supports at-coded node identifiers in addition to id-coded ones
+- **Flexible node identifier parsing** - Grammar rule `node_identifier : ID_CODE | AT_CODE ;` allows both `id` and `at` codes
+- **Enhanced ROOT_ID_CODE support** - Updated lexer allows `'id1'|'at0000'` as root identifiers
+- **Improved CODE_STR pattern** - Better number parsing for code structures
+
+**Benefits:**
+- Backward compatibility with legacy ADL content using `at` codes
+- Support for ADL 2.4 specification features
+- More flexible archetype development workflows
+
+#### `4264_adl14_to_adl24_conversion` Branch  
+**What it adds that's not in main:**
+- **ADL 1.4 to ADL 2.4 conversion** - Direct conversion path to ADL 2.4 format (built on `adl_2.4_support`)
+- **Configurable node ID code system** - Choice between `ID_CODED` (default) and `AT_CODED` conversion modes
+- **Enhanced ADL 2.4 test coverage** - Comprehensive test suite including `ADL14ToADL2Test.java`
+- **ValueSet conversion improvements** - Better handling of terminology value sets during conversion
+- **AT-coded archetype support** - Full support for creating archetypes that use `at` codes throughout
+
+**Benefits:**
+- Support for organizations preferring `at`-coded workflows
+- Direct migration path to ADL 2.4 without intermediate conversions
+- Comprehensive testing ensuring conversion quality
+
+#### `ADL-conv-correct_atcode_numbering` Branch
+**What it adds that's not in main:**
+- **Corrected at-code numbering** - Top-level `at` codes retain their numeric values during conversion instead of being incremented
+- **Improved conversion consistency** - Ensures predictable and standardized code conversion behavior
+- **Enhanced conversion test outputs** - Test methods write conversion results for comparison and regression testing
+
+**Benefits:**
+- More predictable conversion results across different tool implementations
+- Better compatibility with existing ADL 1.4 content
+- Standardized conversion behavior for interoperability
+
+### Summary of Missing Features in Main Branch
+
+The main branch lacks several important ADL capabilities available in the specialized branches:
+
+1. **ADL 2.4 Support** - No support for the latest ADL 2.4 specification features
+2. **Flexible Node ID Systems** - Cannot handle `at`-coded archetypes or mixed code systems  
+3. **Advanced Conversion Options** - Limited to basic ADL 1.4 → ADL 2.0 conversion only
+4. **Enhanced Test Coverage** - Missing comprehensive test suites for different conversion scenarios
+5. **Standardized Conversion Behavior** - Conversion may produce inconsistent results compared to specialized branches
+
+### Recommendations
+
+For production use:
+- **Use `adl_2.4_support` branch** if you need ADL 2.4 specification compliance
+- **Use `4264_adl14_to_adl24_conversion` branch** if you need flexible ADL 1.4 conversion options
+- **Use `ADL-conv-correct_atcode_numbering` branch** if you need consistent at-code conversion behavior
+
 ## Importing and converting ADL 1.4 files
 
 Starting from version 0.7, Archie can import ADL 1.4 files, and convert them to ADL 2. To do so, do the following:
