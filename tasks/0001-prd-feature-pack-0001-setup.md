@@ -37,7 +37,7 @@ The primary problem this feature pack solves is establishing a verified baseline
 
 ## Functional Requirements
 
-1. **Branch Verification**: The system must verify that the current branch contains all commits from the upstream `adl_2.4_support` branch at https://github.com/openEHR/archie/tree/adl_2.4_support. If the branch is not properly based on it, document the divergence.
+1. **Branch Verification**: The system must verify that the current branch contains all commits from the upstream `adl_2.4_support` branch at https://github.com/openEHR/archie/tree/adl_2.4_support. If the branch is not properly based on it or if divergence exists, rebase/include the upstream changes immediately.
 
 2. **Java Test Execution**: The system must execute all existing Java-based tests using the Gradle build system and document the results (pass/fail counts, execution time, any errors).
 
@@ -49,6 +49,7 @@ The primary problem this feature pack solves is establishing a verified baseline
    - Number of failing tests
    - List of any failing tests with brief description
    - Whether failures are pre-existing or related to the setup
+   - Developer will decide if any extra testing is needed after initial test run is complete
 
 5. **Deepwiki MCP Access Verification**: The system must:
    - Verify connection to the deepwiki MCP server
@@ -57,6 +58,7 @@ The primary problem this feature pack solves is establishing a verified baseline
      - https://deepwiki.com/openEHR/archie
      - https://deepwiki.com/openEHR/specifications-ITS-BMM
    - Document successful connection and sample query results
+   - Note: This is a one-time verification, but ensure future agents understand how to use the deepwiki MCP and find other documentation in subsequent steps
 
 6. **Documentation Resource Inventory**: Create an inventory of available documentation resources, including:
    - Deepwiki resources (if accessible)
@@ -119,20 +121,6 @@ N/A - This is a verification and documentation feature pack with no user-facing 
 
 6. **No Critical Blockers**: Any issues discovered are documented with severity assessment; no critical blockers prevent proceeding to Feature Pack 0002.
 
-## Open Questions
+## Development Context
 
-1. If significant divergence exists between the current branch and upstream `adl_2.4_support`, should we rebase immediately or document for later decision?
-
-2. What is the acceptable threshold for test failures? (User indicated "tests should run without errors, but some failures are acceptable if documented" - needs specific threshold if possible)
-
-3. Should setup verification be automated for future use, or is this a one-time manual process?
-
-4. Are there specific deepwiki queries that should be tested beyond basic connection verification?
-
-### Answers to open questions (added manually by developer)
-
-1. rebase/include immediately
-2. Just run the tests and let developer decide any extra testing after task list is finished
-3. one-time in general, but make sure agent from now on knows how it should use the deepwiki MCP and find other documentation in future steps.
-4. no
-   
+**Working Branch**: All development for this project should be done in the `javascript-experiments` branch. This branch contains the necessary setup files, documentation, and will be the base for all feature pack implementation work.
