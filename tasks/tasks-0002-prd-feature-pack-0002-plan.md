@@ -4,9 +4,9 @@ Generated from PRD: `0002-prd-feature-pack-0002-plan.md`
 
 ## Relevant Files
 
-- `docs/strategy-wasm.md` - Comprehensive analysis of Java-to-WebAssembly conversion strategy (5+ pages)
-- `docs/strategy-kotlin-js.md` - Comprehensive analysis of Kotlin/JS transpilation strategy (5+ pages)
-- `docs/strategy-typescript-rewrite.md` - Comprehensive analysis of clean TypeScript rewrite strategy (5+ pages)
+- `docs/strategy-wasm.md` - Comprehensive analysis of Java-to-WebAssembly conversion strategy
+- `docs/strategy-kotlin-js.md` - Comprehensive analysis of Kotlin/JS transpilation strategy
+- `docs/strategy-typescript-rewrite.md` - Comprehensive analysis of clean TypeScript rewrite strategy
 - `docs/strategy-comparison-matrix.md` - Side-by-side comparison of all strategies across evaluation criteria
 - `docs/poc-roadmap.md` - Proof-of-concept plans for each strategy
 - `docs/research-notes/` - Directory for research findings, references, and supporting documentation
@@ -14,7 +14,8 @@ Generated from PRD: `0002-prd-feature-pack-0002-plan.md`
 
 ### Notes
 
-- All strategy documents should be comprehensive (minimum 5 pages each) and include architecture diagrams
+- All strategy documents should be comprehensive, concise, and to the point
+- Include architecture diagrams where helpful
 - Research should cite sources and reference similar projects
 - Analysis should be objective and avoid bias toward any particular strategy
 - Documents are for stakeholder decision-making, so clarity is critical
