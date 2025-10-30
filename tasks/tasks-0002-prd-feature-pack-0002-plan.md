@@ -71,22 +71,22 @@ Generated from PRD: `0002-prd-feature-pack-0002-plan.md`
   - [x] 3.14 Identify risks and limitations specific to Kotlin/JS
   - [x] 3.15 Outline proof-of-concept plan with success criteria
 
-- [ ] 4.0 Strategy 3: TypeScript Rewrite Analysis
-  - [ ] 4.1 Create `docs/strategy-typescript-rewrite.md` document
-  - [ ] 4.2 Document architecture and high-level design for clean TypeScript implementation
-  - [ ] 4.3 Create architecture diagram showing TypeScript module structure
-  - [ ] 4.4 Analyze and document technology stack (TypeScript, build tools, testing frameworks)
-  - [ ] 4.5 Document build and deployment pipeline for TypeScript
-  - [ ] 4.6 Design module structure supporting selective feature loading
-  - [ ] 4.7 Evaluate performance characteristics of native TypeScript
-  - [ ] 4.8 Estimate bundle sizes with modern bundling (Vite/Rollup)
-  - [ ] 4.9 Document browser compatibility and polyfill strategy
-  - [ ] 4.10 Analyze long-term maintainability and code ownership
-  - [ ] 4.11 Document skill requirements (TypeScript developers)
-  - [ ] 4.12 Create development timeline estimate with incremental delivery phases
-  - [ ] 4.13 Document cost analysis (full rewrite vs. automated conversion)
-  - [ ] 4.14 Identify risks including feature parity and ADL specification compliance
-  - [ ] 4.15 Outline proof-of-concept plan (ADL parser POC) with success criteria
+- [x] 4.0 Strategy 3: TypeScript Rewrite Analysis
+  - [x] 4.1 Create `docs/strategy-typescript-rewrite.md` document
+  - [x] 4.2 Document architecture and high-level design for clean TypeScript implementation
+  - [x] 4.3 Create architecture diagram showing TypeScript module structure
+  - [x] 4.4 Analyze and document technology stack (TypeScript, build tools, testing frameworks)
+  - [x] 4.5 Document build and deployment pipeline for TypeScript
+  - [x] 4.6 Design module structure supporting selective feature loading
+  - [x] 4.7 Evaluate performance characteristics of native TypeScript
+  - [x] 4.8 Estimate bundle sizes with modern bundling (Vite/Rollup)
+  - [x] 4.9 Document browser compatibility and polyfill strategy
+  - [x] 4.10 Analyze long-term maintainability and code ownership
+  - [x] 4.11 Document skill requirements (TypeScript developers)
+  - [x] 4.12 Create development timeline estimate with incremental delivery phases
+  - [x] 4.13 Document cost analysis (full rewrite vs. automated conversion)
+  - [x] 4.14 Identify risks including feature parity and ADL specification compliance
+  - [x] 4.15 Outline proof-of-concept plan (ADL parser POC) with success criteria
 
 - [ ] 5.0 Comparative Analysis and Recommendation Framework
   - [ ] 5.1 Create `docs/strategy-comparison-matrix.md` with side-by-side evaluation
