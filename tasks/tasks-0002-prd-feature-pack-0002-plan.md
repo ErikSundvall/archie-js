@@ -37,22 +37,22 @@ Generated from PRD: `0002-prd-feature-pack-0002-plan.md`
   - [x] 1.6 Assess Archie codebase complexity and identify conversion challenges
   - [x] 1.7 Document technology maturity and production-readiness for each option
 
-- [ ] 2.0 Strategy 1: Java-to-WebAssembly Analysis
-  - [ ] 2.1 Create `docs/strategy-wasm.md` document
-  - [ ] 2.2 Document architecture and high-level design for WASM approach
-  - [ ] 2.3 Create architecture diagram showing WASM integration with browser
-  - [ ] 2.4 Analyze and document technology stack (compiler, runtime, build tools)
-  - [ ] 2.5 Document build and deployment pipeline for WASM
-  - [ ] 2.6 Analyze module structure and loading strategy
-  - [ ] 2.7 Evaluate performance characteristics (startup, runtime, memory)
-  - [ ] 2.8 Estimate bundle sizes for different WASM compilers
-  - [ ] 2.9 Document browser compatibility and polyfill requirements
-  - [ ] 2.10 Analyze maintainability and update process from upstream Archie
-  - [ ] 2.11 Document skill requirements and learning curve
-  - [ ] 2.12 Create development timeline estimate with phases
-  - [ ] 2.13 Document cost analysis (development, tooling, maintenance)
-  - [ ] 2.14 Identify risks and limitations specific to WASM approach
-  - [ ] 2.15 Outline proof-of-concept plan with success criteria
+- [x] 2.0 Strategy 1: Java-to-WebAssembly Analysis
+  - [x] 2.1 Create `docs/strategy-wasm.md` document
+  - [x] 2.2 Document architecture and high-level design for WASM approach
+  - [x] 2.3 Create architecture diagram showing WASM integration with browser
+  - [x] 2.4 Analyze and document technology stack (compiler, runtime, build tools)
+  - [x] 2.5 Document build and deployment pipeline for WASM
+  - [x] 2.6 Analyze module structure and loading strategy
+  - [x] 2.7 Evaluate performance characteristics (startup, runtime, memory)
+  - [x] 2.8 Estimate bundle sizes for different WASM compilers
+  - [x] 2.9 Document browser compatibility and polyfill requirements
+  - [x] 2.10 Analyze maintainability and update process from upstream Archie
+  - [x] 2.11 Document skill requirements and learning curve
+  - [x] 2.12 Create development timeline estimate with phases
+  - [x] 2.13 Document cost analysis (development, tooling, maintenance)
+  - [x] 2.14 Identify risks and limitations specific to WASM approach
+  - [x] 2.15 Outline proof-of-concept plan with success criteria
 
 - [ ] 3.0 Strategy 2: Kotlin/JS Transpilation Analysis
   - [ ] 3.1 Create `docs/strategy-kotlin-js.md` document
