@@ -9,9 +9,9 @@ This section will be populated after sub-task generation and user confirmation.
 ## Tasks
 
 - [ ] 1.0 Verify Branch Alignment with Upstream adl_2.4_support
-- [ ] 2.0 Execute and Document Java Test Suite
-- [ ] 3.0 Check for JavaScript/TypeScript Tests
-- [ ] 4.0 Verify Deepwiki MCP Access and Documentation Resources
+- [ ] 2.0 Verify Deepwiki MCP Access and Documentation Resources
+- [ ] 3.0 Execute and Document Java Test Suite
+- [ ] 4.0 Check for JavaScript/TypeScript Tests
 - [ ] 5.0 Generate Setup Summary Report
 
 ### Notes
