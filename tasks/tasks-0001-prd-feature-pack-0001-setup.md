@@ -7,8 +7,8 @@ Generated from: `0001-prd-feature-pack-0001-setup.md`
 - `docs/setup-verification-report.md` - Comprehensive setup summary report documenting all verification results (to be created)
 - `docs/branch-verification.md` - Documentation of branch alignment verification with upstream adl_2.4_support (created)
 - `docs/test-results.md` - Test execution results including pass/fail counts and error details (to be created)
-- `docs/deepwiki-access.md` - Deepwiki MCP access verification and sample query results (to be created)
-- `docs/documentation-inventory.md` - Inventory of available documentation resources (to be created)
+- `docs/deepwiki-access.md` - Deepwiki MCP access verification and sample query results (created)
+- `docs/documentation-inventory.md` - Inventory of available documentation resources (created)
 - `.gitignore` - May need updates to exclude any temporary verification files
 - `README.md` - Existing project documentation (review, no modifications)
 - `build.gradle` - Gradle build configuration (review, no modifications)
@@ -34,15 +34,15 @@ Generated from: `0001-prd-feature-pack-0001-setup.md`
   - [x] 1.7 Verify branch is up-to-date after rebase/merge operation
   - [x] 1.8 Update branch-verification.md with final status and any actions taken
 
-- [ ] 2.0 Verify Deepwiki MCP Access and Documentation Resources
-  - [ ] 2.1 Attempt to connect to deepwiki MCP server
-  - [ ] 2.3 Verify access to https://deepwiki.com/openEHR/archie resource
-  - [ ] 2.4 Verify access to https://deepwiki.com/openEHR/specifications-ITS-BMM resource
-  - [ ] 2.2 Test the `ask_question` tool with sample queries about both openEHR archie and specifications-ITS-BMM resources
-  - [ ] 2.5 Document successful connection and sample query results in `docs/deepwiki-access.md`
-  - [ ] 2.6 If deepwiki MCP is not accessible, document alternative documentation sources and fallback plan
-  - [ ] 2.7 Create documentation inventory listing all available resources in `docs/documentation-inventory.md`
-  - [ ] 2.8 Note how future agents should use deepwiki MCP for documentation lookup
+- [x] 2.0 Verify Deepwiki MCP Access and Documentation Resources
+  - [x] 2.1 Attempt to connect to deepwiki MCP server
+  - [x] 2.3 Verify access to https://deepwiki.com/openEHR/archie resource
+  - [x] 2.4 Verify access to https://deepwiki.com/openEHR/specifications-ITS-BMM resource
+  - [x] 2.2 Test the `ask_question` tool with sample queries about both openEHR archie and specifications-ITS-BMM resources
+  - [x] 2.5 Document successful connection and sample query results in `docs/deepwiki-access.md`
+  - [x] 2.6 If deepwiki MCP is not accessible, document alternative documentation sources and fallback plan
+  - [x] 2.7 Create documentation inventory listing all available resources in `docs/documentation-inventory.md`
+  - [x] 2.8 Note how future agents should use deepwiki MCP for documentation lookup
 
 - [ ] 3.0 Execute and Document Java Test Suite
   - [ ] 3.1 Verify Java JDK is installed and meets version requirements (JDK 8 or higher for runtime, JDK 11+ for build)
