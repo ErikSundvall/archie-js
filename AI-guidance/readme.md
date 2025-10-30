@@ -1,6 +1,12 @@
 # Background
 This is a directory for background starting prompts and files needed to run the three step process based on https://github.com/snarktank/ai-dev-tasks
 
+## Important: Working Branch
+
+**ALL DEVELOPMENT WORK MUST BE DONE IN THE `javascript-experiments` BRANCH.**
+
+This branch is based on `adl_2.4_support` and contains all necessary setup files and documentation. Do not work in other branches unless explicitly instructed otherwise.
+
 ## Deepwiki for documentation
 * https://deepwiki.com/openEHR/archie contains comprehensive documentation for the Archie library
 * https://deepwiki.com/openEHR/specifications-ITS-BMM exkpains the BMM file format and documents openEHR using BMM.
