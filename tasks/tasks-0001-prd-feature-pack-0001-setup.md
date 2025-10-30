@@ -36,25 +36,19 @@ Generated from: `0001-prd-feature-pack-0001-setup.md`
 
 - [ ] 2.0 Verify Deepwiki MCP Access and Documentation Resources
   - [ ] 2.1 Attempt to connect to deepwiki MCP server
-  - [ ] 2.2 Test the `ask_question` tool with a sample query about openEHR archie
   - [ ] 2.3 Verify access to https://deepwiki.com/openEHR/archie resource
   - [ ] 2.4 Verify access to https://deepwiki.com/openEHR/specifications-ITS-BMM resource
+  - [ ] 2.2 Test the `ask_question` tool with sample queries about both openEHR archie and specifications-ITS-BMM resources
   - [ ] 2.5 Document successful connection and sample query results in `docs/deepwiki-access.md`
-  - [ ] 2.6 If deepwiki MCP is not accessible, document alternative documentation sources
+  - [ ] 2.6 If deepwiki MCP is not accessible, document alternative documentation sources and fallback plan
   - [ ] 2.7 Create documentation inventory listing all available resources in `docs/documentation-inventory.md`
   - [ ] 2.8 Note how future agents should use deepwiki MCP for documentation lookup
-  - [ ] 2.9 Document fallback plan if deepwiki remains inaccessible
 
 - [ ] 3.0 Execute and Document Java Test Suite
   - [ ] 3.1 Verify Java JDK is installed and meets version requirements (JDK 8 or higher for runtime, JDK 11+ for build)
   - [ ] 3.2 Verify Gradle wrapper (gradlew) is present and executable
   - [ ] 3.3 Run `./gradlew build` to ensure project builds successfully
-  - [ ] 3.4 Execute full test suite using `./gradlew test`
-  - [ ] 3.5 Capture and record total number of tests executed
-  - [ ] 3.6 Record number of passing tests
-  - [ ] 3.7 Record number of failing tests
-  - [ ] 3.8 Document any test failures with brief descriptions in `docs/test-results.md`
-  - [ ] 3.9 Note test execution time and any performance observations
+  - [ ] 3.4 Execute full test suite using `./gradlew test` and capture results (total tests, passing, failing, execution time, and any test failures with brief descriptions in `docs/test-results.md`)
   - [ ] 3.10 Determine if failures are pre-existing or related to setup
   - [ ] 3.11 Document test environment details (Java version, Gradle version, OS)
 
