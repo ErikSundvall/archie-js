@@ -10,6 +10,12 @@ Generated from PRD: `0002-prd-feature-pack-0002-plan.md`
 - `docs/strategy-comparison-matrix.md` - Side-by-side comparison of all strategies across evaluation criteria
 - `docs/poc-roadmap.md` - Proof-of-concept plans for each strategy
 - `docs/research-notes/` - Directory for research findings, references, and supporting documentation
+  - `java-to-wasm-compilers.md` - Analysis of WASM compiler options (GraalVM, TeaVM, JWebAssembly, CheerpJ)
+  - `kotlin-js-capabilities.md` - Kotlin/JS compiler capabilities and limitations research
+  - `typescript-ecosystem.md` - TypeScript ecosystem and openEHR JavaScript libraries
+  - `similar-conversion-projects.md` - Case studies of comparable conversion projects
+  - `archie-complexity-assessment.md` - Detailed Archie codebase complexity analysis
+  - `technology-maturity-summary.md` - Production-readiness assessment for all technologies
 - `docs/architecture-diagrams/` - Directory for architecture diagrams for each strategy
 
 ### Notes
@@ -22,14 +28,14 @@ Generated from PRD: `0002-prd-feature-pack-0002-plan.md`
 
 ## Tasks
 
-- [ ] 1.0 Research and Technology Assessment
-  - [ ] 1.1 Research Java-to-WASM compilation options (GraalVM, TeaVM, JWebAssembly, CheerpJ)
-  - [ ] 1.2 Research Kotlin/JS compiler capabilities and limitations
-  - [ ] 1.3 Research TypeScript ecosystem and existing openEHR JavaScript libraries
-  - [ ] 1.4 Identify and document similar conversion projects for case studies
-  - [ ] 1.5 Create research notes directory and compile findings with citations
-  - [ ] 1.6 Assess Archie codebase complexity and identify conversion challenges
-  - [ ] 1.7 Document technology maturity and production-readiness for each option
+- [x] 1.0 Research and Technology Assessment
+  - [x] 1.1 Research Java-to-WASM compilation options (GraalVM, TeaVM, JWebAssembly, CheerpJ)
+  - [x] 1.2 Research Kotlin/JS compiler capabilities and limitations
+  - [x] 1.3 Research TypeScript ecosystem and existing openEHR JavaScript libraries
+  - [x] 1.4 Identify and document similar conversion projects for case studies
+  - [x] 1.5 Create research notes directory and compile findings with citations
+  - [x] 1.6 Assess Archie codebase complexity and identify conversion challenges
+  - [x] 1.7 Document technology maturity and production-readiness for each option
 
 - [ ] 2.0 Strategy 1: Java-to-WebAssembly Analysis
   - [ ] 2.1 Create `docs/strategy-wasm.md` document
