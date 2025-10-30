@@ -374,6 +374,15 @@ Since this is analysis only, validation is through:
 
 15. **Multiple Strategies**: Could we pursue multiple strategies in parallel (e.g., quick WASM POC + long-term TS rewrite)?
 
+## Answers to open questions (manually added by developer)
+Questions 1-4 are interesting -they are up to you to solve.
+Skip questions 5, 6, 7, 8, 11 and 13
+9: yes if they are useful
+10: yes
+12: I (the architect/developer) do. 
+14: yes
+15: yes
+
 ---
 
 ## Notes for Implementation
