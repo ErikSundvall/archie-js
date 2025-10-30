@@ -128,3 +128,11 @@ N/A - This is a verification and documentation feature pack with no user-facing 
 3. Should setup verification be automated for future use, or is this a one-time manual process?
 
 4. Are there specific deepwiki queries that should be tested beyond basic connection verification?
+
+### Answers to open questions (added manually by developer)
+
+1. rebase/include immediately
+2. Just run the tests and let developer decide any extra testing after task list is finished
+3. one-time in general, but make sure agent from now on knows how it should use the deepwiki MCP and find other documentation in future steps.
+4. no
+   
