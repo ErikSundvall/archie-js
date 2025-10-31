@@ -28,16 +28,34 @@ Comparison of three conversion strategies for bringing Archie (Java openEHR libr
 
 | Aspect | WASM | Kotlin/JS | TypeScript |
 |--------|------|-----------|------------|
-| **Maturity** | TeaVM: Mature<br>GraalVM: Experimental | Production-ready | Production-ready |
-| **Complexity** | Medium | High (dual conversion) | Medium-High |
-| **Risk** | Medium | High | Medium |
+| **Maturity** | TeaVM: Mature<br>GraalVM: Experimental<br>CheerpJ: Production | Production-ready | Production-ready |
+| **Complexity** | Medium-High (reflection issue) | High (dual conversion) | Medium-High |
+| **Risk** | High (TeaVM reflection)<br>Low (CheerpJ) | High | Medium |
 | **Proven** | ✅ Yes (Minecraft, others) | ⚠️ Limited examples | ✅ Yes (FHIR, etc.) |
-| **Feasibility Score** | 7/10 | 6/10 | **8/10** ⭐ |
+| **Reflection Compatible** | ⚠️ TeaVM: No (needs work)<br>✅ CheerpJ: Yes | ⚠️ Partial | ✅ N/A (redesigned) |
+| **Feasibility Score** | 6/10 (TeaVM)<br>8/10 (CheerpJ) | 6/10 | **8/10** ⭐ |
 
 **Analysis**:
-- WASM with TeaVM is proven but bundle size is concerning
+- WASM with TeaVM is proven but has reflection limitations
 - Kotlin/JS requires full Java→Kotlin conversion first
 - TypeScript is well-proven in medical/healthcare space (FHIR)
+
+### 1.5 Reflection Compatibility (Critical for Archie)
+
+| Aspect | WASM (TeaVM) | WASM (CheerpJ) | Kotlin/JS | TypeScript |
+|--------|--------------|----------------|-----------|------------|
+| **Reflection Support** | ⚠️ Limited | ✅ Full | ⚠️ Limited | N/A (designed without) |
+| **ReflectionModelInfoLookup** | ❌ Won't work | ✅ Works as-is | ⚠️ Needs redesign | N/A (redesigned) |
+| **Mitigation Needed** | 🔴 Yes (2-4 weeks) | ✅ None | 🟡 Partial | ✅ None |
+| **Risk Level** | 🔴 High | ✅ Low | 🟡 Medium | ✅ Low |
+
+**Critical Finding**:
+- **Archie uses `ReflectionModelInfoLookup`** extensively for RM/AOM class introspection
+- **TeaVM cannot support** the Reflections library used by Archie
+- **Requires code changes**: Build-time metadata generation or static registration
+- **CheerpJ works as-is**: Full JVM emulation includes reflection
+- **Kotlin/JS has limitations**: Similar to TeaVM, needs redesign
+- **TypeScript avoids issue**: Design from scratch without reflection dependency
 
 ### 2. Long-Term Maintenance
 

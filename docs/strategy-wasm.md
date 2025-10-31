@@ -4,7 +4,11 @@
 
 Convert Archie Java library to WebAssembly using automated compilation tools, preserving the existing Java codebase while enabling browser execution. Primary candidates: TeaVM and CheerpJ, with GraalVM as future option.
 
-**Recommendation**: TeaVM for open-source approach, CheerpJ for commercial/enterprise needs.
+**Critical Issue**: Archie uses Java reflection extensively (`ReflectionModelInfoLookup` for RM/AOM introspection). This affects compiler choice significantly.
+
+**Recommendation**: 
+- **CheerpJ** for immediate production use (full reflection support, commercial license)
+- **TeaVM** for open-source approach (requires 2-4 weeks to implement metadata generation workaround)
 
 ## Architecture Overview
 
@@ -89,6 +93,12 @@ teavm {
 - TeaVM WASM runtime (~50KB)
 - Browser with WebAssembly support
 
+**Reflection Support**: ⚠️ **Limited**
+- TeaVM supports basic reflection (getClass, Class.forName)
+- Does NOT support runtime class scanning/discovery
+- Reflections library (used by Archie) will NOT work
+- **Impact on Archie**: See "Reflection Usage in Archie" section below
+
 #### Option B: CheerpJ (Recommended for Enterprise)
 
 **Core Components**:
@@ -105,6 +115,12 @@ teavm {
 - CheerpJ runtime library (~200KB compressed)
 - JVM emulation layer
 
+**Reflection Support**: ✅ **Full**
+- CheerpJ includes complete JVM emulation
+- Full reflection support including runtime class scanning
+- Reflections library works as-is
+- **Impact on Archie**: No code changes needed for reflection
+
 #### Option C: GraalVM (Future Consideration)
 
 **Status**: Not production-ready for WASM as of 2025
@@ -116,6 +132,209 @@ teavm {
 - **WASM Toolchain**: Emscripten (for optimizations)
 - **Testing**: Selenium WebDriver for browser testing
 - **CI/CD**: GitHub Actions with WASM caching
+
+## Reflection Usage in Archie (Critical Issue)
+
+### Overview
+
+Archie makes **heavy use of Java reflection** for the Reference Model (RM) and Archetype Object Model (AOM) introspection. This is a **critical compatibility concern** for WASM compilation.
+
+### Where Archie Uses Reflection
+
+1. **`ReflectionModelInfoLookup` class** (aom/src/main/java/com/nedap/archie/rminfo/)
+   - **Purpose**: Scans Java packages to discover RM/AOM classes at runtime
+   - **Used by**: ArchieRMInfoLookup, ArchieAOMInfoLookup
+   - **Reflection APIs used**:
+     - `Reflections` library (org.reflections) for package scanning
+     - `Class.forName()` for dynamic class loading
+     - `getDeclaredFields()` for field introspection
+     - `getDeclaredMethods()` for method introspection
+     - `getInterfaces()` and `getSuperclass()` for type hierarchy
+
+2. **Validation Engine**
+   - Uses reflection to access RM object properties
+   - Invokes getter methods dynamically
+   - Inspects class annotations (`@Invariant`)
+
+3. **Dynamic Object Creation**
+   - Creates RM instances based on archetype constraints
+   - Uses reflection to set field values
+
+4. **Type Information System**
+   - Builds runtime metadata about RM/AOM classes
+   - Maps archetype type names to Java classes
+   - Discovers attributes and their types
+
+### Reflection Support by WASM Compiler
+
+| Compiler | Reflection Support | Archie Compatibility | Mitigation Required |
+|----------|-------------------|----------------------|---------------------|
+| **TeaVM** | ⚠️ Partial | ❌ **Will NOT work as-is** | 🔴 **High effort** required |
+| **CheerpJ** | ✅ Full | ✅ **Works as-is** | ✅ None needed |
+| **JWebAssembly** | ❌ Minimal | ❌ **Will NOT work** | 🔴 **Very high effort** |
+| **GraalVM** | ⚠️ Limited | ⚠️ Unknown (experimental) | 🟡 TBD |
+
+### TeaVM Reflection Limitations
+
+**What TeaVM Supports**:
+- `obj.getClass()` - Getting class of an instance
+- `Class.forName()` - Loading known classes (compile-time registered)
+- Basic `instanceof` checks
+
+**What TeaVM Does NOT Support**:
+- ❌ Runtime package scanning (`Reflections` library)
+- ❌ `getDeclaredMethods()` / `getDeclaredFields()` (runtime introspection)
+- ❌ Dynamic method invocation via `Method.invoke()`
+- ❌ Annotation processing at runtime
+- ❌ ClassLoader-based discovery
+
+**Impact**: Archie's `ReflectionModelInfoLookup` will **completely fail** with TeaVM.
+
+### Mitigation Strategies for TeaVM
+
+If using TeaVM, Archie code must be **significantly modified**:
+
+#### Option 1: Pre-compiled Metadata (Recommended for TeaVM)
+
+**Approach**: Generate metadata at build time instead of runtime reflection
+
+```java
+// Instead of runtime scanning with Reflections library
+public class PrecompiledArchieRMInfoLookup extends ModelInfoLookup {
+    public PrecompiledArchieRMInfoLookup() {
+        // Manually register all RM classes (generated at build time)
+        addClass(Composition.class);
+        addClass(Observation.class);
+        addClass(Element.class);
+        // ... all RM classes (100+)
+        
+        // Manually register attributes (generated)
+        addAttribute("Composition", "content", List.class, Entry.class);
+        // ... all attributes
+    }
+}
+```
+
+**Build Process**:
+1. Annotation processor scans Java code at compile time
+2. Generates `PrecompiledArchieRMInfoLookup.java`
+3. Replaces `ReflectionModelInfoLookup` in WASM build
+
+**Effort**: 
+- Initial: 2-4 weeks to create annotation processor
+- Ongoing: Automatic (regenerates on build)
+
+**Pros**:
+- Works with TeaVM
+- Potentially faster than runtime reflection
+- Bundle may be smaller (no Reflections library)
+
+**Cons**:
+- Requires build-time code generation
+- More complex build process
+- Different code path for JVM vs WASM
+
+#### Option 2: Static Registration
+
+**Approach**: Manually register classes (simpler but more manual)
+
+```java
+public class StaticArchieRMInfoLookup extends ModelInfoLookup {
+    public StaticArchieRMInfoLookup() {
+        // Manually list all classes
+        registerClass(Composition.class);
+        registerClass(Observation.class);
+        // ...
+    }
+}
+```
+
+**Effort**: 
+- Initial: 1-2 weeks
+- Ongoing: Manual updates when RM changes
+
+**Pros**:
+- Simple implementation
+- No build tooling needed
+
+**Cons**:
+- Error-prone (easy to forget classes)
+- Maintenance burden
+- Manual sync with RM changes
+
+#### Option 3: Hybrid Approach
+
+**Approach**: Use reflection on JVM, pre-compiled metadata for WASM
+
+```java
+public class HybridInfoLookup extends ModelInfoLookup {
+    public HybridInfoLookup() {
+        if (Platform.isWasm()) {
+            loadPrecompiledMetadata();
+        } else {
+            useReflectionScanning();
+        }
+    }
+}
+```
+
+**Effort**: 2-3 weeks
+
+**Pros**:
+- Best of both worlds
+- JVM keeps flexibility
+- WASM gets working solution
+
+**Cons**:
+- Two code paths to maintain
+- Testing complexity
+
+### CheerpJ: No Mitigation Needed
+
+CheerpJ includes **full JVM emulation**, so:
+- ✅ Reflections library works unchanged
+- ✅ All reflection APIs supported
+- ✅ No code modifications needed
+- ✅ Archie compiles and runs as-is
+
+**Tradeoff**: Larger bundle size due to JVM emulation (~1-2MB extra)
+
+### Recommendation Update Based on Reflection
+
+**Original Recommendation**: TeaVM for open-source
+**Revised Recommendation**: 
+
+1. **For quick POC/MVP**: **CheerpJ**
+   - Works immediately with no code changes
+   - Accept commercial license cost
+   - Accept larger bundle size
+   - Fastest path to working browser version
+
+2. **For production (open-source)**: **TeaVM + Pre-compiled Metadata**
+   - Invest 2-4 weeks in build-time metadata generation
+   - Smaller bundle than CheerpJ
+   - Free and open source
+   - One-time engineering investment
+
+3. **For long-term**: **TypeScript Rewrite**
+   - No reflection issues (design for JavaScript from start)
+   - Smallest bundles
+   - Best performance
+   - Most maintainable
+
+### POC Impact
+
+The **POC plan must validate reflection workarounds**:
+
+**TeaVM POC** (updated scope):
+- Week 1-2: Setup + attempt compilation
+- Week 3: **Implement pre-compiled metadata for ADL parser subset**
+- Week 4: Test and validate approach
+- **Success criteria includes**: Working metadata generation
+
+**CheerpJ POC**:
+- No changes needed to scope
+- Reflection will work out of the box
 
 ## Build and Deployment Pipeline
 
@@ -431,7 +650,16 @@ if (!WebAssembly) {
 
 ### Technical Risks
 
-1. **Bundle Size** (🔴 High)
+1. **Reflection Compatibility** (🔴 **CRITICAL** for TeaVM, ✅ Resolved for CheerpJ)
+   - **Risk**: Archie's ReflectionModelInfoLookup will not work with TeaVM
+   - **Impact**: Core functionality broken without code changes
+   - **Mitigation (TeaVM)**: 
+     - Implement build-time metadata generation (2-4 weeks effort)
+     - OR use static class registration (1-2 weeks, ongoing maintenance)
+   - **Mitigation (CheerpJ)**: None needed - full reflection support
+   - **Validation**: MUST be tested in POC phase
+
+2. **Bundle Size** (🔴 High)
    - **Risk**: 2-5 MB initial download may be unacceptable
    - **Mitigation**: CDN caching, code splitting exploration, accept limitation
 
@@ -477,16 +705,18 @@ if (!WebAssembly) {
 
 ### POC Objectives
 
-1. Validate TeaVM can compile Archie ADL parser
-2. Measure bundle size and load time
-3. Benchmark parsing performance
-4. Demonstrate JavaScript interop
-5. Evaluate developer experience
+1. **Validate reflection workaround** for ReflectionModelInfoLookup (CRITICAL)
+2. Validate TeaVM can compile Archie ADL parser
+3. Measure bundle size and load time
+4. Benchmark parsing performance
+5. Demonstrate JavaScript interop
+6. Evaluate developer experience
 
 ### POC Scope
 
 **In Scope**:
 - ADL 2 parser compilation
+- **Build-time metadata generation for RM classes** (reflection workaround)
 - Parse sample archetypes
 - Expose parsing API to JavaScript
 - Basic error handling
@@ -497,27 +727,43 @@ if (!WebAssembly) {
 - Operational templates
 - Production optimization
 
-### POC Timeline: 4-6 weeks
+### POC Timeline: 5-7 weeks (updated for reflection work)
 
-**Week 1-2**: Environment setup
+**Week 1**: Environment setup
 - Install TeaVM Gradle plugin
 - Configure minimal Archie subset
-- Compile first WASM module
+- Identify reflection usage in parser
 
-**Week 3-4**: Integration
+**Week 2**: Reflection mitigation
+- Implement annotation processor for metadata generation
+- Generate static class registry for parser subset
+- Test build-time code generation
+
+**Week 3**: WASM compilation
+- Compile parser with pre-generated metadata
+- Verify TeaVM accepts modified code
+- Initial WASM module generation
+
+**Week 4**: Integration
 - Create JavaScript bridge
 - Load and initialize in browser
 - Parse sample ADL files
 
-**Week 5-6**: Evaluation
+**Week 5**: Testing
+- Parse multiple archetypes
+- Validate metadata completeness
+- Compare with Java behavior
+
+**Week 6-7**: Evaluation
 - Performance benchmarks
 - Bundle size analysis
 - Documentation
-- Demo presentation
+- Decision recommendation
 
 ### Success Criteria
 
 ✅ **Must Have**:
+- **Reflection workaround works correctly** (validates RM classes without runtime scanning)
 - Successfully parse ADL 2 archetype in browser
 - Bundle size < 3 MB (gzipped)
 - Parse time within 2x of Java performance
