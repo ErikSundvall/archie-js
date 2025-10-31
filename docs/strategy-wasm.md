@@ -7,7 +7,7 @@ Convert Archie Java library to WebAssembly using automated compilation tools, pr
 **Critical Issue**: Archie uses Java reflection extensively (`ReflectionModelInfoLookup` for RM/AOM introspection). This affects compiler choice significantly.
 
 **Recommendation**: 
-- **CheerpJ** for immediate production use (full reflection support, commercial license)
+- **CheerpJ** for immediate production use (full reflection support, **free for open source**)
 - **TeaVM** for open-source approach (requires 2-4 weeks to implement metadata generation workaround)
 
 ## Architecture Overview
@@ -102,7 +102,7 @@ teavm {
 #### Option B: CheerpJ (Recommended for Enterprise)
 
 **Core Components**:
-- CheerpJ Compiler (commercial license)
+- CheerpJ Compiler (**free for open source projects**, commercial license for proprietary use)
 - Full JVM emulation in browser
 - Automatic JavaScript bindings
 
@@ -304,9 +304,9 @@ CheerpJ includes **full JVM emulation**, so:
 **Original Recommendation**: TeaVM for open-source
 **Revised Recommendation**: 
 
-1. **For quick POC/MVP**: **CheerpJ**
+1. **For quick POC/MVP or open source projects**: **CheerpJ**
    - Works immediately with no code changes
-   - Accept commercial license cost
+   - **Free for open source projects** (commercial license for proprietary use)
    - Accept larger bundle size
    - Fastest path to working browser version
 
@@ -617,22 +617,23 @@ if (!WebAssembly) {
 
 **Total Year 1**: $220K-$330K
 
-### CheerpJ (Commercial):
+### CheerpJ (Free for Open Source):
 
 **Development Costs**:
 - Engineering: 4-6 months × 2.75 FTE = 11-17 person-months
 - At $150K/year avg: $138K-$212K
 
 **Tooling Costs**:
-- CheerpJ License: $5K-20K/year (estimate, contact vendor)
+- CheerpJ License: **$0 for open source projects** (commercial: $5K-20K/year)
 - Build infrastructure: $100-200/month
-- Support contract: $5K-15K/year (optional)
+- Support contract: $5K-15K/year (optional, for commercial support)
 
 **Ongoing Maintenance**:
 - 0.25-0.5 FTE ongoing: $38K-$75K/year
-- Annual license renewal: $5K-20K/year
+- Annual license renewal: **$0 for open source** (commercial: $5K-20K/year)
 
-**Total Year 1**: $155K-$245K + licensing
+**Total Year 1 (Open Source)**: $140K-$215K
+**Total Year 1 (Commercial)**: $155K-$245K + licensing
 
 ### 5-Year TCO:
 
@@ -641,7 +642,12 @@ if (!WebAssembly) {
 - Years 2-5: $300K-$600K (maintenance)
 - **Total**: $520K-$930K
 
-**CheerpJ**:
+**CheerpJ (Open Source)**:
+- Year 1: $140K-$215K
+- Years 2-5: $150K-$300K (maintenance)
+- **Total**: $290K-$515K
+
+**CheerpJ (Commercial)**:
 - Year 1: $155K-$265K
 - Years 2-5: $170K-$380K + licensing
 - **Total**: $325K-$645K + $20K-80K licensing

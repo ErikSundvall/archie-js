@@ -29,7 +29,7 @@ Analysis of conversion technologies for bringing Archie (Java openEHR library) t
 #### CheerpJ
 - **TRL**: 9 (System Proven in Production)
 - **Production Status**: ✅ Fully Production-Ready
-- **Limitation**: 💰 **Commercial license required**
+- **Limitation**: 💰 **Free for open source** (commercial license for proprietary use)
 - **Cost**: Contact vendor for pricing
 - **Verdict**: Technically excellent, budget-dependent
 
@@ -89,7 +89,7 @@ Analysis of conversion technologies for bringing Archie (Java openEHR library) t
 
 ### Low Risk (Production-Ready):
 ✅ **TypeScript Rewrite**: Proven technology, huge ecosystem, excellent tooling
-✅ **CheerpJ**: Commercially supported, proven but has licensing costs
+✅ **CheerpJ**: Commercially supported, proven, **free for open source**
 
 ### Medium Risk:
 ⚠️ **TeaVM**: Mature for JavaScript, WASM support developing

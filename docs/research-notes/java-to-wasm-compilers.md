@@ -64,9 +64,9 @@ Research on viable Java-to-WASM compilers for converting Archie (openEHR library
   - Good performance
   - Full JVM emulation
 - **Cons**:
-  - **Commercial license required** (not open source for production use)
+  - **Free for open source projects** (commercial license required for proprietary use)
   - Larger bundle size (includes JVM)
-  - Licensing costs
+  - Licensing costs for commercial projects
 - **References**:
   - Leaning Technologies: https://leaningtech.com/cheerpj/
   - Used for running enterprise Java apps in browser
@@ -84,7 +84,7 @@ Research on viable Java-to-WASM compilers for converting Archie (openEHR library
 1. **GraalVM**: High potential but experimental WASM support is a blocker
 2. **TeaVM**: Best balance for now - proven track record, good for Archie's complexity
 3. **JWebAssembly**: May struggle with complex dependencies (ANTLR, etc.)
-4. **CheerpJ**: Technically capable but licensing costs are concern
+4. **CheerpJ**: Technically capable, **free for open source**
 
 ## Recommendation for Further Investigation:
 **Priority 1**: TeaVM (JavaScript output initially, WASM as it matures)

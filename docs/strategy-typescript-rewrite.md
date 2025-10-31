@@ -476,6 +476,50 @@ pnpm typedoc src/ --out docs/
 
 **Total Timeline**: 9-12 months (depending on team size)
 
+### Alternative: AI-Assisted Development Timeline
+
+**Conditions**:
+- AI coding agents (e.g., GitHub Copilot, Cursor, Codeium) used throughout
+- Lead developer is already an **openEHR expert**
+- **P_BMM files used to auto-generate** basic TypeScript AM/RM structure
+
+**Impact on Timeline**: **5-6 months** (vs. 9-12 months traditional) ⬇️ 40-50% faster
+
+### Phase 1: Foundation (1-1.5 months)
+- AI assists with: Project scaffolding, ANTLR integration, boilerplate code
+- P_BMM auto-generation: Creates ~60-70% of basic RM classes automatically
+- openEHR expert validates and refines output
+
+### Phase 2: Core Features (1.5-2 months)
+- AI auto-generates RM classes from P_BMM specifications
+- Expert focuses on validation logic and edge cases
+- P_BMM eliminates manual class creation for 100+ RM types
+
+### Phase 3: Advanced Features (1-1.5 months)
+- AI helps with APath parsing and template flattening
+- Expert provides openEHR-specific business logic
+
+### Phase 4: Production (1 month)
+- AI generates test cases
+- Expert validates functionality
+
+**Resource Requirements (AI-Assisted)**:
+- 1 Senior TypeScript Developer + openEHR Expert (100% time, 6 months)
+- AI coding assistant subscription: $20-40/month
+- P_BMM parser/generator tool: $15K-$25K (initial development if not existing)
+
+**Cost (AI-Assisted)**: $90K-$125K (vs. $410K-$550K traditional)
+
+**Key Assumptions**:
+1. Developer is openEHR expert (crucial for validation and architecture)
+2. P_BMM auto-generation works (requires ~2-3 weeks to build generator first)
+3. AI tools at GitHub Copilot/GPT-4 level maturity
+
+**Risks**:
+- AI-generated code requires careful review (security, correctness)
+- Single developer creates knowledge concentration risk
+- P_BMM generator tool needs initial investment
+
 ### Resource Requirements
 - 2 Senior TypeScript Developers (100% time)
 - 1 openEHR Expert (50% time)

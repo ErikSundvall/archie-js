@@ -99,7 +99,8 @@ Comparison of three conversion strategies for bringing Archie (Java openEHR libr
 | **Time-to-Market** | Fastest | Medium | Slower |
 
 **Analysis**:
-- WASM (TeaVM) fastest because Java code can be compiled as-is
+- WASM (CheerpJ) fastest because Java code compiles as-is with full reflection
+- WASM (TeaVM) requires additional 2-4 weeks for reflection workaround
 - Kotlin/JS delayed by Java→Kotlin conversion phase
 - TypeScript takes longer due to complete rewrite
 
@@ -168,18 +169,19 @@ Comparison of three conversion strategies for bringing Archie (Java openEHR libr
 
 ### 9. Total Cost of Ownership (5 Years)
 
-| Cost Category | WASM (TeaVM) | Kotlin/JS | TypeScript |
-|---------------|--------------|-----------|------------|
-| **Year 1** | | | |
-| - Development | $200K-$310K | $190K-$260K | $410K-$550K |
-| - Tooling | $3K-$6K | $3K-$6K | $3K-$10K |
-| **Years 2-5** | | | |
-| - Maintenance (total) | $300K-$600K | $500K-$760K | $500K-$668K |
-| - Tooling (total) | $12K-$24K | $12K-$24K | $14K-$38K |
-| **5-Year TCO** | **$515K-$940K** 🟢 | $705K-$1,050K | $927K-$1,266K |
+| Cost Category | WASM (CheerpJ OSS) | WASM (TeaVM) | Kotlin/JS | TypeScript |
+|---------------|-------------------|--------------|-----------|------------|
+| **Year 1** | | | | |
+| - Development | $138K-$212K | $200K-$310K | $190K-$260K | $410K-$550K |
+| - Tooling | $1K-$2K | $3K-$6K | $3K-$6K | $3K-$10K |
+| **Years 2-5** | | | | |
+| - Maintenance (total) | $150K-$300K | $300K-$600K | $500K-$760K | $500K-$668K |
+| - Tooling (total) | $4K-$8K | $12K-$24K | $12K-$24K | $14K-$38K |
+| **5-Year TCO** | **$293K-$522K** 🟢 | $515K-$940K | $705K-$1,050K | $927K-$1,266K |
 
 **Analysis**:
-- WASM has lowest TCO (preserves Java code)
+- WASM (CheerpJ for open source) has lowest TCO with full reflection support
+- WASM (TeaVM) requires reflection workaround but still competitive
 - TypeScript has highest initial cost but reasonable ongoing
 - Kotlin/JS high ongoing cost (maintaining fork)
 
@@ -193,7 +195,7 @@ Comparison of three conversion strategies for bringing Archie (Java openEHR libr
 | Risk Category | WASM | Kotlin/JS | TypeScript |
 |---------------|------|-----------|------------|
 | **Technology Risk** | Medium | High | **Low** ⭐ |
-| **Vendor Lock-in** | CheerpJ: High<br>TeaVM: Low | Low | **None** ⭐ |
+| **Vendor Lock-in** | CheerpJ: Low (free for OSS)<br>TeaVM: Low | Low | **None** ⭐ |
 | **Skill Availability** | High | Medium | **Low** ⭐ |
 | **Maintenance Burden** | Medium | **High** 🔴 | Low |
 | **Performance Risk** | Medium | Low | **Low** ⭐ |
@@ -201,22 +203,23 @@ Comparison of three conversion strategies for bringing Archie (Java openEHR libr
 | **Overall Risk** | Medium | **High** | **Low** ⭐ |
 
 **Critical Risks**:
-- **WASM**: Bundle size, debugging difficulty, specialist availability
-- **Kotlin/JS**: Upstream synchronization, conversion effort, dual maintenance
+- **WASM**: Bundle size, TeaVM reflection limitations (needs workaround), debugging difficulty
+- **Kotlin/JS**: Upstream synchronization, conversion effort, dual maintenance, reflection limitations
 - **TypeScript**: Feature parity, longer initial timeline, specification compliance
 
 ## Use Case Analysis
 
 ### Use Case 1: Quick Delivery (6 months)
 
-**Winner**: **WASM (TeaVM)** 🏆
+**Winner**: **WASM (CheerpJ)** 🏆
 
 **Reasoning**:
-- Compile existing Java code
+- Compile existing Java code as-is (full reflection support)
 - Fastest time-to-market
+- **Free for open source projects**
 - Accept larger bundle size as tradeoff
 
-**Recommendation**: Use TeaVM, deliver quickly, consider TypeScript for v2.0
+**Recommendation**: Use CheerpJ for immediate delivery, consider TypeScript for v2.0
 
 ### Use Case 2: Best Long-Term Solution
 

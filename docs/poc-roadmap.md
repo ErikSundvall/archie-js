@@ -26,7 +26,7 @@ Recommend executing POCs in priority order, using learnings from each to inform 
 ### Scope
 
 **In Scope**:
-- Set up TypeScript project (Vite, Vitest, ESLint)
+- Set up TypeScript project (Deno or Vite, Vitest, ESLint)
 - Integrate ANTLR4-ts parser generator
 - Generate TypeScript parser from ADL grammar
 - Implement core AOM classes (Archetype, CAttribute, CObject)
@@ -45,8 +45,8 @@ Recommend executing POCs in priority order, using learnings from each to inform 
 
 #### Week 1: Setup and Parser Generation
 **Days 1-2**: Project scaffold
-- Initialize TypeScript project with Vite
-- Configure Vitest for testing
+- Initialize TypeScript project with Deno or Vite
+- Configure Vitest for testing (or Deno's built-in test runner)
 - Set up ESLint, Prettier
 - Create CI/CD pipeline (GitHub Actions)
 

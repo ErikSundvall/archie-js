@@ -26,6 +26,7 @@
 - **Testing Library**: DOM/component testing
 
 ### Package Management
+- **Deno**: Modern runtime with built-in package management, TypeScript-first (recommended)
 - **npm**: Standard, huge registry
 - **pnpm**: Faster, efficient disk usage
 - **Yarn**: Alternative with good features
@@ -82,7 +83,7 @@
 1. **Native Browser Support**: No compilation/transpilation overhead
 2. **Smaller Bundles**: Tree-shaking, modern modules
 3. **Development Speed**: Faster iteration, HMR
-4. **Ecosystem**: Huge npm ecosystem
+4. **Ecosystem**: Huge Deno/npm ecosystem
 5. **Type Safety**: Similar to Java generics
 6. **Modern Syntax**: async/await, destructuring, etc.
 
@@ -135,7 +136,7 @@
 - **Fast builds**: Sub-second incremental compilation
 - **Great DX**: IntelliJ/VS Code support excellent
 - **Easy debugging**: Browser DevTools, source maps
-- **Package distribution**: npm publish, CDN (jsDelivr, unpkg)
+- **Package distribution**: Deno modules (deno.land/x), npm publish, CDN (jsDelivr, unpkg)
 
 ## Community & Resources
 
